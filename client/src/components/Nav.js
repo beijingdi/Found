@@ -5,19 +5,18 @@ import './Nav.module.css';
 const Nav = (props) => {
   return(
     <nav>
-    {/* <p>I am Nav</p> */}
       <span> FOUND.</span>
-      <ul class="nav">
-        <li class="nav-item">
+      <ul className="nav">
+        <li className="nav-item">
           <NavLink>About</NavLink>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <NavLink>Corporate Retreats</NavLink>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <NavLink>Gallery</NavLink>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
           <button>Book Now</button>
         </li>
       </ul>

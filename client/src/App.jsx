@@ -1,15 +1,20 @@
 import React from "react";
-import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter} from "react-router-dom";
+
 import './App.css';
-import Nav from "./components/Nav"
+
+import Nav from "./components/Nav";
+import MainPage from "./pages/MainPage";
 
 function App() {
+
   return (
     <>
-      {/* <p>is it rendering?</p> */}
-      <BrowserRouter>
-        <Nav/>
-      </BrowserRouter>
+      <Nav/>
+      <Routes>
+        <Route exact path="/" element={<MainPage/>}>
+        </Route>
+      </Routes>
     </>
   );
 }
