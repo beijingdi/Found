@@ -1,13 +1,19 @@
 import React from "react";
 
+import classes_mainpage from "./MainPage.module.css";
+
+import Calendar from "../components/Calendar";
+
+
 function MainPage(){
   return (
     <>
-      <div>
-        <h1>Let's Thrive Together.</h1>
-        <button>Book Now</button>
+      <div className = {`${classes_mainpage.top_page} row`}>
+        <div><h1 className="test">Let's Thrive Together.</h1></div>
+        <div><button>Book Now</button></div>
       </div>
-      <div>
+
+      <div className="mission">
         <ul>
           <li>
             <h3>UNPLUG</h3>
@@ -22,6 +28,16 @@ function MainPage(){
             <p>Recharge through daily yoga, water sports and activities,coaching sessions,seasonal menus, and comfortable accommodation.</p>
           </li>
         </ul>
+      </div>
+
+      <div className="Gallery">
+        <h3>Photo Gallery</h3>
+
+      </div>
+
+      <div className="Calendar">
+        <h3>Calendar</h3>
+        {/* <Calendar/> */}
       </div>
     </>
   );
