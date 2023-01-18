@@ -1,5 +1,16 @@
 nav {
   background: url("../img/background.jpg");
   background-color: lightblue;
+}
+
+
+
+
+.logo{
+  font-family: "Marcellus",cursive;
+  font-size:25px;
+  color: #F5F8F8;
+  margin-top: 0.5em;
+  margin-left: 3em;
 
 }
