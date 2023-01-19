@@ -2,6 +2,7 @@ import React from "react";
 
 import classes_mainpage from "./MainPage.module.css";
 
+import Gallery from "../components/Gallery";
 import Calendar from "../components/Calendar";
 
 
@@ -30,7 +31,7 @@ function MainPage(){
 
       <div className="Gallery">
         <h3>Photo Gallery</h3>
-
+        <Gallery/>
       </div>
 
       <div className="Calendar">
