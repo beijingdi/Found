@@ -3,7 +3,7 @@ import React from "react";
 import classes_mainpage from "./MainPage.module.css";
 
 import Gallery from "../components/Gallery";
-import Calendar from "../components/Calendar";
+import Scheduler from "../components/Scheduler";
 
 
 function MainPage(){
@@ -36,7 +36,7 @@ function MainPage(){
 
       <div className="Calendar">
         <h3>Calendar</h3>
-        {/* <Calendar/> */}
+        <Scheduler/>
       </div>
     </>
   );

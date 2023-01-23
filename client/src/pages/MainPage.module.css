@@ -18,7 +18,7 @@ h3 {
   flex-direction: column;
 }
 
-button {
+/* button {
   height:3em;
   width:10em;
   border:none;
@@ -27,7 +27,7 @@ button {
   background-color:#F5F8F8;
   margin-left:8em;
   box-shadow:5em;
-}
+} */
 
 .mission {
   background-color: #F8F9F8;
