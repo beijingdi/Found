@@ -5,6 +5,7 @@ import './App.css';
 
 import Nav from "./components/Nav";
 import MainPage from "./pages/MainPage";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/" element={<MainPage/>}>
         </Route>
       </Routes>
+      <Footer/>
     </>
   );
 }
