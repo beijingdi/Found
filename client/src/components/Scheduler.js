@@ -9,15 +9,18 @@ import  classes_scheduler from "./Scheduler.module.css";
 
 
 function Scheduler (){
+  let event = events[0]
+
+  let startTime = event.start;
+  let endTime = event.end
+
+  
 
   function highlightEventDays(date) {
-    let startDate = events[0].start.setHours(0,0,0,0);
-    let endDate = events[0].end.setHours(0,0,0,0);
+    let startDate = startTime.setHours(0,0,0,0);
+    let endDate = endTime.setHours(0,0,0,0);
     let eachDay = date.date.setHours(0,0,0,0);
 
-    console.log(startDate);
-    console.log(endDate);
-    console.log(eachDay);
 
     if (eachDay > startDate && eachDay < endDate){
       return classes_scheduler["eventDays"];
@@ -28,7 +31,7 @@ function Scheduler (){
     return {}
   }
   
-  console.log(classes_scheduler["eventDays"])
+  let activities = events[0].description.map(activity => {return (<div>{activity}</div>)});
 
   return(
     <>
@@ -37,18 +40,16 @@ function Scheduler (){
       className={classes_scheduler["react-calendar"]}
       tileClassName={highlightEventDays}
       />
-      
-
     </div>
 
     <div>
-      <h4>Events:</h4>
+      <div>Start: {startTime.toLocaleString()}</div>
+      <div>End: {endTime.toLocaleString()}</div>
+      <div>From {event.price}</div>
+      <div>{event.available_spots} spots left ({event.total_spots} spots total)</div>
+      {activities}
     </div>
-    {/* <Datepicker
-    select="range"
-    rangeHighlight={true}
-    showRangeLabels={true}
-    /> */}
+
     </>
   );
 }
