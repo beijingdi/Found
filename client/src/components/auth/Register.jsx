@@ -1,33 +1,37 @@
-import React,{useState} from "react";
-import users from "./users";
+import React,{useState,useRef} from "react";
+import {users} from "./users";
 
 export const Register = (props) => {
+  const [nameRef,emailRef,passwordRef,confirmPasswordRef] = useRef();
 
 
-  const submitHandler = (e) => {
+  const registrationHandler = (e) => {
     e.preventDefault();
-    users.append({name,password,email});
-    //axios
+    const [name,email,password,confirmPassword] = [nameRef,emailRef,passwordRef.confirmPasswordRef].map(ref => ref.current.value); 
+    //add form validation
+    //change below to axios
+    users.append({name,email,password});
+  
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={registrationHandler}>
       <label>Name:</label>
       <input type="text"
-             value={name}
+             ref={nameRef}
              required
               />
       <label>E-mail:</label>
       <input type="text"
-             value={email}
+             ref={emailRef}
              required/>
       <label>Password:</label>
       <input type="text"
-             value = {password} 
+             ref={passwordRef} 
              required/>
       <label>Confirm Password:</label>
       <input type="text"
-             value={confirmPassword}
+             ref={confirmPasswordRef}
              required/>
       <button type="submit">register</button>
     </form>
