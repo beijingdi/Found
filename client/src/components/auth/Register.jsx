@@ -34,6 +34,7 @@ export const Register = (props) => {
              ref={confirmPasswordRef}
              required/>
       <button type="submit">register</button>
+      <button onClick={props.closeForm}>close</button>
     </form>
   );
 }

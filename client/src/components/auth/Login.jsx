@@ -1,24 +1,57 @@
-import React,{useRef} from "react";
-import {users} from "./users";
+import React, { useRef } from "react";
+import axios from "axios";
+import { users } from "./users";
+
 
 export const Login = (props) => {
-  const {emailRef,passwordRef} = useRef();
+  // const [user,setUser] = useState("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
   // const passwordRef = useRef();
 
-  const logInHandler = (e) => {
+
+  const setToken = (token) => {
+    localStorage.setItem("jwtToken", token);
+  };
+
+  // Attach the JWT token to API requests
+  const attachToken = () => {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (jwtToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+    }
+  };
+
+  const logInHandler = async (e) => {
     e.preventDefault();
-    return;
+    const name = users.filter(user => user.email == emailRef.current.value)[0].name;
+
+    // Example usage:
+
+    // After a successful login
+    try {
+      const response = await axios.post("/login", {
+        username: emailRef.current.value,
+        password: passwordRef.current.value,
+      });
+  
+      setToken(response.data.token);
+      attachToken();
+    } catch (err) {
+      console.error(err)
+    }
+
   }
 
   return (
-    <form onSubmit = {logInHandler}>
+    <form onSubmit={logInHandler}>
       <label>email:</label>
       <input type="text"
-             ref={emailRef}
+        ref={emailRef}
       />
       <label>password:</label>
       <input type="text"
-             ref={passwordRef}
+        ref={passwordRef}
       />
       <button type="submit">Log In</button>
     </form>

@@ -10,6 +10,10 @@ import Login from "./auth/Login.jsx";
 
 const Nav = (props) => {
   const loggedIn = !!props.cookies.user;
+  const user = props.cookies.user? props.cookies.user.name : "";
+  const [name, setName] = useState(user);
+
+  //display login/registeration form
   const [loginWindow, setLoginWindow] = useState(loggedIn);
   const [registerWindow,setRegisterWindow] = useState(false);
 
@@ -20,6 +24,9 @@ const Nav = (props) => {
   const openRegister = () => {
     setLoginWindow(false);
     setRegisterWindow(true);
+  }
+  const closeRegister = (e) => {
+    setRegisterWindow(false);
   }
 
 
@@ -45,11 +52,16 @@ const Nav = (props) => {
           <li class="nav-item">
             <a class="nav-link" href="#">Gallery</a>
           </li>
+          {loggedIn && (
+            <li class="nav-item">
+              <strong>{name}</strong>
+            </li>
+
+          )}
           {!loggedIn && (
             <li class="nav-item">
             <button onClick={openLogin}>Log In</button>
-           
-          </li>
+            </li>
           )}
         </ul>
        
@@ -58,13 +70,17 @@ const Nav = (props) => {
 
     {loginWindow && (
       <>
-      <Login/>
+      <Login
+        setCookie={props.setCookie}
+      />
       <button onClick={openRegister}>Register</button>
       </>
     )}
 
     {registerWindow && (
-      <Register/>
+      <Register
+        closeForm={closeRegister}
+      />
     )}
 
     {}
