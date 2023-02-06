@@ -2,7 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import nav_classes from './Nav.module.css';
 
+import Register from "./auth/Register.jsx";
+
+
+
+
 const Nav = (props) => {
+  const loggedIn = !!props.cookies.user;
   return(
     <>
 
@@ -29,15 +35,7 @@ const Nav = (props) => {
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Book Now</a>
           </li>
         </ul>
-      </div>
-     
-
-     
-          {/* <NavLink class="nav-item">About</NavLink>
-          <NavLink class="nav-item">Corporate Retreats</NavLink>
-          <NavLink class="nav-item">Gallery</NavLink>
-          <NavLink className="nav-item"><button>Book Now</button></NavLink> */}
-       
+      </div>  
     </nav>
     </>
   )
