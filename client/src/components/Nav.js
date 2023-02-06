@@ -1,18 +1,32 @@
-import React from "react";
+import React,{useState}from "react";
 import { NavLink } from "react-router-dom";
 import nav_classes from './Nav.module.css';
 
 import Register from "./auth/Register.jsx";
+import Login from "./auth/Login.jsx";
 
 
 
 
 const Nav = (props) => {
   const loggedIn = !!props.cookies.user;
+  const [loginWindow, setLoginWindow] = useState(loggedIn);
+  const [registerWindow,setRegisterWindow] = useState(false);
+
+  const openLogin = () => {
+    loginWindow ? setLoginWindow(false) : setLoginWindow(true);
+  }
+
+  const openRegister = () => {
+    setLoginWindow(false);
+    setRegisterWindow(true);
+  }
+
+
   return(
     <>
 
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar-expand-lg">
 
       <a className={`${nav_classes.logo} navbar-brand`} href="/">FOUND.</a>
 
@@ -31,12 +45,30 @@ const Nav = (props) => {
           <li class="nav-item">
             <a class="nav-link" href="#">Gallery</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Book Now</a>
+          {!loggedIn && (
+            <li class="nav-item">
+            <button onClick={openLogin}>Log In</button>
+           
           </li>
+          )}
         </ul>
+       
       </div>  
     </nav>
+
+    {loginWindow && (
+      <>
+      <Login/>
+      <button onClick={openRegister}>Register</button>
+      </>
+    )}
+
+    {registerWindow && (
+      <Register/>
+    )}
+
+    {}
+    
     </>
   )
 }

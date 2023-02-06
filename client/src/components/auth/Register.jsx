@@ -2,7 +2,7 @@ import React,{useState,useRef} from "react";
 import {users} from "./users";
 
 export const Register = (props) => {
-  const [nameRef,emailRef,passwordRef,confirmPasswordRef] = useRef();
+  const {nameRef,emailRef,passwordRef,confirmPasswordRef} = useRef();
 
 
   const registrationHandler = (e) => {
@@ -36,6 +36,6 @@ export const Register = (props) => {
       <button type="submit">register</button>
     </form>
   );
-
-
 }
+
+export default Register;
