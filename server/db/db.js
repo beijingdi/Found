@@ -12,9 +12,16 @@ const { Pool } = require('pg');
 const pool = new Pool(dbParams);
 
 
-const getUserWithEmail = (email) => {
-  
-
+const getUserWithEmail = async (email) => {
+  try {
+    const result = await pool.query();
+    return result.rows[0];
+  } 
+  catch (err) {
+    console.log(err.message)  ;  
+  }
 }
+
+
 
 module.exports = {getUserWithEmail}

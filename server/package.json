@@ -4,6 +4,7 @@
     "pg": "^8.9.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "reset": "psql -U development -d found_development < ./db/schema.sql && psql -U development -d found_development < ./db/development.sql "
   }
 }
