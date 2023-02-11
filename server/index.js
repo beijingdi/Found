@@ -1,6 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 const store = new session.MemoryStore();
+
+const config = require('./config.json');
 const PORT = process.env.PORT || 3001;
 
 const passport = require("passport");
@@ -12,11 +14,11 @@ const usersRouter = require("./routes/users.js");
 
 const app = express();
 //Import passport config
-require("./config/passport.js");
+require("./helpers/passport.js");
 //session config
 app.use(
   session({
-    secret: "found",
+    secret: config.secret,
     cookie: {maxAge: 300000000, secure:false},
     saveUninitialized: false,
     resave: false,
