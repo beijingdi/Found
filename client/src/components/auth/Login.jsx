@@ -10,24 +10,22 @@ export const Login = (props) => {
   // const passwordRef = useRef();
 
 
-  const setToken = (token) => {
-    localStorage.setItem("jwtToken", token);
-  };
+  // const setToken = (token) => {
+  //   localStorage.setItem("jwtToken", token);
+  // };
 
-  // Attach the JWT token to API requests
-  const attachToken = () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (jwtToken) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-    }
-  };
+  // // Attach the JWT token to API requests
+  // const attachToken = () => {
+  //   const jwtToken = localStorage.getItem("jwtToken");
+  //   if (jwtToken) {
+  //     axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+  //   }
+  // };
 
   const logInHandler = async (e) => {
     e.preventDefault();
-    const name = users.filter(user => user.email == emailRef.current.value)[0].name;
 
     // Example usage:
-
     // After a successful login
     try {
       const response = await axios.post("/login", {
@@ -35,8 +33,8 @@ export const Login = (props) => {
         password: passwordRef.current.value,
       });
   
-      setToken(response.data.token);
-      attachToken();
+      // setToken(response.data.token);
+      // attachToken();
     } catch (err) {
       console.error(err)
     }
