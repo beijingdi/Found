@@ -39,4 +39,4 @@ const createUser = async (email,password,name) => {
 }
 
 
-module.exports = {getUserWithEmail}
+module.exports = {getUserWithEmail, createUser};
