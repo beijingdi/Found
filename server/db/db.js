@@ -11,12 +11,25 @@ const dbParams = process.env.DATABASE_URL
 const { Pool } = require('pg');
 const pool = new Pool(dbParams);
 
+console.log(process.env.DATABASE_URL)
+console.log(dbParams)
+
+const allUsers = async() => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM users`,[]
+    );
+    console.log(result);
+    return result.rows;
+  } catch(err){
+    console.log(err);
+  }
+}
 
 const findUser = async (email) => {
   try {
     const result = await pool.query(
-      `SELECT * FROM users
-       WHERE email = $1`,[email]
+      `SELECT * FROM users WHERE email = $1;`,[email]
     );
     return result.rows[0];
   } 
@@ -30,7 +43,7 @@ const createUser = async (email,password,name) => {
     const result = await pool.query(
       `INSERT INTO users (email,password,name)
        VALUES ($1, $2, $3)
-       RETURNING *;`,[email,password,name]
+       RETURNING *;`,[name,email,password]
     );
   }
   catch(err) {
@@ -39,4 +52,4 @@ const createUser = async (email,password,name) => {
 }
 
 
-module.exports = {getUserWithEmail, createUser};
+module.exports = {allUsers,findUser, createUser};

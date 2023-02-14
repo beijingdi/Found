@@ -6,6 +6,15 @@ const passport = require("passport");
 
 module.exports = (db) => {
 
+  router.get('/all', async(req,res) => {
+    try {
+      const users = await db.allUsers();
+      res.json(users);
+    } catch(err) {
+      console.log(err);
+    }
+  });
+
   router.post(
     '/login', 
     passport.authenticate("local", {failuerRedirect:"/login"}),
@@ -18,6 +27,7 @@ module.exports = (db) => {
 
   router.post('/register', async(req, res) => {
     const {email, password, name} = req.body;
+    console.log(email)
     try {
       const user = await db.findUser(email);
       if (user) {
@@ -35,6 +45,7 @@ module.exports = (db) => {
 
   });
 
+  return router;
 
 }
 
