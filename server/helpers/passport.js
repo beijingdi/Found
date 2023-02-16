@@ -6,16 +6,17 @@ const bcrypt = require("bcrypt");
 // Set up the Passport strategy:
   passport.use(
     new LocalStrategy((email,password,done) => {
-      db.findUser(email, async (err,user) => {
+      db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user)=> {
+        console.log("passport is working.");
         if(err) {
           return done(err);
         }
         if(!user){
-          return done(null,false);
+          return done(null,false,{message: 'Incorrect username or password'});
         }
         const matchedPassword = await bcrypt.compare(password, user.password);
         if(!matchedPassword){
-          return done(null,false);
+          return done(null,false, {message: 'Incorrect username or password'});
         }
         return done(null,user);
       })
@@ -25,15 +26,14 @@ const bcrypt = require("bcrypt");
 
 // Serialize a user
   passport.serializeUser((user,done) => {
-    done(null,user.id);
+    process.nextTick(function() {
+      cb(null, { id: user.id, name: user.name });
+    });
   });
 
 // Deserialize a user
-  passport.deserializeUser((id,done) => {
-    db.findById(id, (err,user) => {
-      if (err) {
-        return done(err);
-      }
-      return done(null, user);
+  passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+      return cb(null, user);
     });
   });
