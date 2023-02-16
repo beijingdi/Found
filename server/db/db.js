@@ -38,10 +38,10 @@ const findUser = async (email) => {
   }
 }
 
-const createUser = async (email,password,name) => {
+const createUser = async (name,email,password) => {
   try {
     const result = await pool.query(
-      `INSERT INTO users (email,password,name)
+      `INSERT INTO users (name,email,password)
        VALUES ($1, $2, $3)
        RETURNING *;`,[name,email,password]
     );
@@ -52,4 +52,4 @@ const createUser = async (email,password,name) => {
 }
 
 
-module.exports = {allUsers,findUser, createUser};
+module.exports = {allUsers,findUser,createUser};

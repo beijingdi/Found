@@ -9,6 +9,7 @@ const config = require('./config.json');
 const PORT = process.env.PORT || 3001;
 
 const passport = require("passport");
+const cookieParser = require('cookie-parser');
 
 const db = require("./db/db.js");
 

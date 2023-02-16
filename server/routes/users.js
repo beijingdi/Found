@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 
+
+
 module.exports = (db) => {
 
   router.get('/all', async(req,res) => {
@@ -17,16 +19,13 @@ module.exports = (db) => {
 
   router.post(
     '/login', 
-    passport.authenticate("local", {failuerRedirect:"/login"}),
-    async (req, res) => {
-      res.redirect("/");
-    }
+    passport.authenticate("local", {failuerRedirect:"/", failuerMessage: true})
   );
 
 
 
   router.post('/register', async(req, res) => {
-    const {email, password, name} = req.body;
+    const {name, email, password} = req.body;
     console.log(email)
     try {
       const user = await db.findUser(email);
