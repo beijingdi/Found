@@ -11,6 +11,13 @@ module.exports = (db) => {
   router.get('/all', async(req,res) => {
     try {
       const users = await db.allUsers();
+      // console.log(req.session);
+      // if (req.session.viewCount) {
+      //   req.session.viewCount = req.session.viewCount + 1;
+      // } else {
+      //   req.session.viewCount = 1;
+      // }
+      // res.json(req.session.viewCount);
       res.json(users);
     } catch(err) {
       console.log(err);
@@ -37,8 +44,8 @@ module.exports = (db) => {
         return res.redirect('/');
       }
 
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password,salt);
+      // const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password,10);
       await db.createUser(name,email,hashedPassword);
       res.redirect("/");
     } catch (err) {

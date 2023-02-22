@@ -6,20 +6,6 @@ import axios from "axios";
 export const Login = (props) => {
   // const [user,setUser] = useState("");
   const [loginState,setLoginState] = useState({email: "", password: ""});
-  // const passwordRef = useRef();
-
-
-  // const setToken = (token) => {
-  //   localStorage.setItem("jwtToken", token);
-  // };
-
-  // // Attach the JWT token to API requests
-  // const attachToken = () => {
-  //   const jwtToken = localStorage.getItem("jwtToken");
-  //   if (jwtToken) {
-  //     axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-  //   }
-  // };
 
   const logInHandler = async (e) => {
     e.preventDefault();

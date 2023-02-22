@@ -1,14 +1,16 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const session = require("express-session");
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser');
 const store = new session.MemoryStore();
 
 const config = require('./config.json');
 const PORT = process.env.PORT || 3001;
 
-const passport = require("passport");
+const passport = require("passport"); 
+const crypto = require("crypto");
 const cookieParser = require('cookie-parser');
 
 const db = require("./db/db.js");
@@ -16,27 +18,41 @@ const db = require("./db/db.js");
 const usersRouter = require("./routes/users");
 
 
+
+
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
-//Import passport config
-require("./helpers/passport.js");
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+// app.use(cors({ 
+//   origin: "http://localhost:3000",
+//   credentials: true
+// }));
+
+
 //session config
 app.use(
   session({
     secret: config.secret,
-    cookie: {maxAge: 300000000, secure:false},
-    saveUninitialized: false,
     resave: false,
+    saveUninitialized: true,
     store,
+    cookie:{
+      maxAge: 1000 * 60 * 60 * 24 
+    }
   })
 );
+app.use(cookieParser(config.secret));
 
 // Passport Config
+ 
+require("./helpers/passport");
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //Routes
 app.use('/users',usersRouter(db));
@@ -48,3 +64,4 @@ app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 })
 
+ 
