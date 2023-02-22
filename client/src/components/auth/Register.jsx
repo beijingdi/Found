@@ -1,5 +1,4 @@
 import React,{useState,useRef} from "react";
-import {users} from "./users";
 import axios from "axios";
 
 export const Register = (props) => {

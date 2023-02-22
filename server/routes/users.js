@@ -20,6 +20,9 @@ module.exports = (db) => {
   router.post(
     '/login', 
     passport.authenticate("local", {failuerRedirect:"/", failuerMessage: true})
+    // (req,res) => {
+    //   res.send(req.session.passport);
+    // }
   );
 
 
