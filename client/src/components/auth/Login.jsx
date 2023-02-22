@@ -7,6 +7,7 @@ export const Login = (props) => {
   // const [user,setUser] = useState("");
   const [loginState,setLoginState] = useState({email: "", password: ""});
 
+
   const logInHandler = async (e) => {
     e.preventDefault();
 
@@ -17,10 +18,10 @@ export const Login = (props) => {
         email: loginState.email,
         password: loginState.password
       });
-      return response;
-  
-      // setToken(response.data.token);
-      // attachToken();
+
+      props.setUser(response.data.user);
+      props.setLoginWindow(false);
+      return;
     } catch (err) {
       console.error(err)
     }

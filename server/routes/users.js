@@ -11,13 +11,6 @@ module.exports = (db) => {
   router.get('/all', async(req,res) => {
     try {
       const users = await db.allUsers();
-      // console.log(req.session);
-      // if (req.session.viewCount) {
-      //   req.session.viewCount = req.session.viewCount + 1;
-      // } else {
-      //   req.session.viewCount = 1;
-      // }
-      // res.json(req.session.viewCount);
       res.json(users);
     } catch(err) {
       console.log(err);
@@ -26,13 +19,11 @@ module.exports = (db) => {
 
   router.post(
     '/login', 
-    passport.authenticate("local", {failuerRedirect:"/", failuerMessage: true})
-    // (req,res) => {
-    //   res.send(req.session.passport);
-    // }
+    passport.authenticate("local", {failuerRedirect:"/", failuerMessage: true}),
+    (req,res,next) => {
+      return res.json({status: 200, user: req.user});
+    }
   );
-
-
 
   router.post('/register', async(req, res) => {
     const {name, email, password} = req.body;
@@ -53,6 +44,11 @@ module.exports = (db) => {
     }
 
   });
+
+  router.post('.logout',(req,res) => {
+    req.logout();
+    res.redirect("/");
+  })
 
   return router;
 
