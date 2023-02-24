@@ -11,7 +11,7 @@ const dbParams = process.env.DATABASE_URL
 const { Pool } = require('pg');
 const pool = new Pool(dbParams);
 
-console.log(process.env.DATABASE_URL)
+
 console.log(dbParams)
 
 const allUsers = async() => {

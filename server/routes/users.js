@@ -11,42 +11,19 @@ module.exports = (db) => {
   router.get('/all', async(req,res) => {
     try {
       const users = await db.allUsers();
-      // console.log(req.session);
-      // if (req.session.viewCount) {
-      //   req.session.viewCount = req.session.viewCount + 1;
-      // } else {
-      //   req.session.viewCount = 1;
-      // }
-      // res.json(req.session.viewCount);
       res.json(users);
     } catch(err) {
       console.log(err);
     }
   });
 
-  router.post('/login', 
-  passport.authenticate('local', {failureRedirect: '/'}),
-  (req,res,next) => {
-    console.log("session");
-    console.log(req.session);
-    res.redirect("/");
-    // console.log(req.body);
-    // console.log("post request sent");
-    //   passport.authenticate("local",(err,user,info) => {
-    //     console.log("passport authentication starts");
-    //     console.log({err,user,info});
-     
-    //     if(err) throw err;
-       
-    //     if (!user) res.send("No User Exists");
-
-    //       req.logIn(user, err => {
-    //         if (err) throw err;
-    //         res.send('Successfully Authenticated');
-    //         console.log(req.user);
-    //       })
-    //   })(req,res,next);
-  });
+  router.post(
+    '/login', 
+    passport.authenticate("local", {failuerRedirect:"/", failuerMessage: true}),
+    (req,res,next) => {
+      return res.json({status: 200, user: req.user});
+    }
+  );
 
   router.post('/register', async(req, res) => {
     const {name, email, password} = req.body;
@@ -67,6 +44,11 @@ module.exports = (db) => {
     }
 
   });
+
+  router.post('.logout',(req,res) => {
+    req.logout();
+    res.redirect("/");
+  })
 
   return router;
 
