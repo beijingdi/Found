@@ -31,22 +31,21 @@ const Nav = (props) => {
   return(
     <>
     
-    <nav className="navbar-expand-lg">
+    <nav className="navbar navbar-expand-lg">
       <a className={`${nav_classes.logo} navbar-brand`} href="#">FOUND.</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
-
-      <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auro">
+      <div className={`collapse navbar-collapse justify-content-end `} id="navbarSupportedContent">
+        <ul className={`navbar-nav mr-auro ${nav_classes.nav_contents}`}>
           <li className="nav-item">
-            <a className="nav-link" href="#">About</a>
+            <a className={`nav-link ${nav_classes.nav_item}`} href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Corporate Retreats</a>
+            <a class={`nav-link ${nav_classes.nav_item}`} href="#">Corporate Retreats</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Gallery</a>
+            <a class={`nav-link ${nav_classes.nav_item}`} href="#">Gallery</a>
           </li>
           {loggedIn && (
             <li class="nav-item dropdown">
@@ -64,11 +63,10 @@ const Nav = (props) => {
           )}
           {!loggedIn && (
             <li class="nav-item">
-            <button onClick={openLogin}>Log In</button>
+            <button class={`nav-link ${nav_classes.nav_item} ${nav_classes.nav_button}`} onClick={openLogin}>Log In</button>
             </li>
           )}
         </ul>
-       
       </div>  
     </nav>
 
