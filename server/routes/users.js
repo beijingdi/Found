@@ -37,22 +37,21 @@ module.exports = (db) => {
 
       // const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password,10);
-      await db.createUser(name,email,hashedPassword);
-      res.redirect("/");
+      const newUser = await db.createUser(name,email,hashedPassword);
+      return res.json({status: 200, user:newUser});
     } catch (err) {
       res.status(500).json({message: err.message});
     }
 
   });
 
-  router.post('.logout',(req,res) => {
-    req.logout();
-    res.redirect("/");
+  router.post('/logout',(req,res) => {
+    req.logout((err)=>{
+      if(err) return next(err);
+      res.redirect('/');
+    });
+  
   })
-
   return router;
 
 }
-
-
-
