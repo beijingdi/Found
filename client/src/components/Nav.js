@@ -5,6 +5,8 @@ import nav_classes from './Nav.module.css';
 import Register from "./auth/Register.jsx";
 import Login from "./auth/Login.jsx";
 
+import axios from "axios";
+
 
 
 
@@ -20,13 +22,17 @@ const Nav = (props) => {
     loginWindow ? setLoginWindow(false) : setLoginWindow(true);
   }
 
-  const openRegister = () => {
-    setLoginWindow(false);
-    setRegisterWindow(true);
+  const logOut = async(e) => {
+    e.preventDefault();
+    try{
+      await axios.post("/users/logout");
+      setUser();
+      return;
+    } catch(err){
+      console.log(err);
+    }
   }
-  const closeRegister = (e) => {
-    setRegisterWindow(false);
-  }
+
 
   return(
     <>
@@ -57,7 +63,7 @@ const Nav = (props) => {
                 <a class="dropdown-item" href="#">My Bookings</a>
                 <a class="dropdown-item" href="#">Past Bookings</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Log Out</a>
+                <button class="dropdown-item" type="button" onClick={logOut} >Log Out</button>
               </div>
           </li>
           )}
@@ -74,15 +80,20 @@ const Nav = (props) => {
       <>
       <Login
         setUser={setUser}
-        setLoginWindow = {setLoginWindow}
+        show={loginWindow}
+        setShow = {setLoginWindow}
+        setRegister={setRegisterWindow}
+       
       />
-      <button onClick={openRegister}>Register</button>
+      {/* <button onClick={openRegister}>Register</button> */}
       </>
     )}
 
     {registerWindow && (
       <Register
-        closeForm={closeRegister}
+        setUser={setUser}
+        show={registerWindow}
+        setShow={setRegisterWindow}
       />
     )}
   
