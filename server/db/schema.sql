@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS trips CASCADE;
+DROP TABLE IF EXISTS bookings CASCADE;
 
 
 CREATE TABLE users (
@@ -8,3 +10,21 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE trips(
+  id SERIAL PRIMARY KEY NOT NULL,
+  title varchar(255) NOT NULL,
+  total_spots INTEGER NOT NULL,
+  available_spots INTEGER NOT NULL,
+  start_time TIMESTAMP WITH TIME ZONE,
+  end_time TIMESTAMP WITH TIME ZONE,
+  price INTEGER NOT NULL,
+  description TEXT NOT NULL
+);
+
+CREATE TABLE bookings (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  trip_id INTEGER REFERENCES trips(id) ON DELETE CASCADE
+);
+
+ 
