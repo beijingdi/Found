@@ -59,7 +59,7 @@ const Nav = (props) => {
                 {user.name}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Book</a>
+                <a class="dropdown-item" href="/trips">Book</a>
                 <a class="dropdown-item" href="#">My Bookings</a>
                 <a class="dropdown-item" href="#">Past Bookings</a>
                 <div class="dropdown-divider"></div>
