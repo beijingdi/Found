@@ -16,6 +16,7 @@ const cookieParser = require('cookie-parser');
 const db = require("./db/db.js");
 
 const usersRouter = require("./routes/users");
+const tripsRouter = require('./routes/trips');
 
 
 
@@ -62,6 +63,7 @@ app.use(passport.session());
 
 //Routes
 app.use('/users',usersRouter(db));
+app.use('/trips',tripsRouter(db));
 
 
 
