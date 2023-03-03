@@ -7,22 +7,22 @@ import { useCookies } from "react-cookie";
 import './App.css';
 
 import Nav from "./components/Nav";
-import MainPage from "./pages/MainPage";
 import Footer from "./components/Footer";
 
+import MainPage from "./pages/MainPage";
+import BookEventPage from "./pages/BookEventPage";
+
 function App() {
-  const [cookies,setCookie,removeCookie] = useCookies(["user"]);
 
   return (
     <>
-      <Nav
-        cookies={cookies}
-        setCookie={setCookie}
-        removeCookie={removeCookie}
-      />
+      <Nav/>
       <Routes>
         <Route exact path="/" element={<MainPage/>}>
         </Route>
+        <Route exact path="/trips" element={<BookEventPage/>}>
+        </Route>
+        
       </Routes>
       <Footer/>
     </>
